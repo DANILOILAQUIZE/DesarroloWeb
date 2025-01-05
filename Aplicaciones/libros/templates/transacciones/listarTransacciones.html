@@ -1,0 +1,53 @@
+{% extends "plantilla.html" %}
+
+{% block contenido %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Lista de Transacciones</h2>
+
+    <!-- Botón para agregar nueva transacción -->
+    <div class="mb-3 text-end">
+        <a href="{% url 'agregarTransaccion' %}" class="btn btn-primary">Agregar Nueva Transacción</a>
+    </div>
+
+    <!-- Tabla de transacciones -->
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover text-center">
+            <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Comprador</th>
+                    <th>Libro</th>
+                    <th>Precio</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if transacciones %}
+                    {% for transaccion in transacciones %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ transaccion.comprador.username }}</td>
+                            <td>{{ transaccion.libro.titulo }}</td>
+                            <td>${{ transaccion.precio }}</td>
+                            <td>{{ transaccion.estado }}</td>
+                            <td>
+                                <!-- Botones de acción -->
+                                <a href="{% url 'editarTransaccion' transaccion.id %}" class="btn btn-sm btn-warning">Editar</a>
+                                <form action="{% url 'eliminarTransaccion' transaccion.id %}" method="post" class="d-inline">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="6">No hay transacciones registradas.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

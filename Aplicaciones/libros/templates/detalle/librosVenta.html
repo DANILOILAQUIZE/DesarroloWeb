@@ -1,0 +1,50 @@
+{% extends "plantilla.html" %}
+
+{% block contenido %}
+<div class="container">
+    <h2 class="text-center mb-4">Libros en Venta</h2>
+
+    <!-- Filtro o búsqueda de libros -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <input type="text" id="buscarLibro" class="form-control" placeholder="Buscar libro..." onkeyup="buscarLibro()">
+        </div>
+    </div>
+
+    <!-- Listado de libros -->
+    <div class="row">
+        {% for libro in libros %}
+        <div class="col-md-4 mb-4">
+            <div class="card border shadow-sm">
+                {% if libro.imagen %}
+                <img src="{{ libro.imagen.url }}" class="card-img-top" alt="{{ libro.titulo }}" style="width: 100%; height: 200px; object-fit: cover;">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ libro.titulo }}</h5>
+                    <p class="card-text">{{ libro.descripcion|truncatewords:15 }}</p>
+                    <p class="card-text"><strong>${{ libro.precio }}</strong></p>
+                    <a href="{% url 'detalles_libro' libro.id %}" class="btn btn-primary">Ver Detalles</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    function buscarLibro() {
+        let input = document.getElementById('buscarLibro');
+        let filter = input.value.toUpperCase();
+        let rows = document.querySelectorAll('.card');
+
+        rows.forEach(function(row) {
+            let title = row.querySelector('.card-title').innerText;
+            if (title.toUpperCase().indexOf(filter) > -1) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    }
+</script>
+{% endblock %}

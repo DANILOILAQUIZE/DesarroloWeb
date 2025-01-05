@@ -1,0 +1,65 @@
+{% extends "plantilla.html" %}
+
+{% block contenido %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Listado de Libros</h2>
+
+    <!-- Botón para agregar un nuevo libro -->
+    <div class="mb-3 text-right">
+        <a href="{% url 'agregarLibro' %}" class="btn btn-primary">Agregar Nuevo Libro</a>
+    </div>
+
+    <!-- Tabla de libros -->
+    <table class="table table-bordered text-center" id="mitabla">
+        <thead class="table-light">
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>Precio</th>
+                <th>Estado</th>
+                <th>Categoría</th>
+                <th>Vendedor</th>
+                <th>Disponible</th>
+                <th>Imagen</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for libro in libros %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ libro.titulo }}</td>
+                    <td>{{ libro.autor }}</td>
+                    <td>${{ libro.precio }}</td>
+                    <td>{% if libro.disponible %} Disponible {% else %} No disponible {% endif %}</td>
+                    <td>{{ libro.categoria.nombre }}</td>
+                    <td>{{ libro.vendedor.username }}</td>
+                    <td>{{ libro.disponible|yesno:"Sí,No" }}</td>
+                    <td>
+                        {% if libro.imagen %}
+                            <img src="{{ libro.imagen.url }}" alt="Imagen del libro" class="img-thumbnail" style="width: 100px; height: auto;">
+                        {% else %}
+                            No disponible
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url 'editarLibro' libro.id %}" class="btn btn-sm btn-warning">Editar</a>
+                        <a href="{% url 'eliminarLibro' libro.id %}" class="btn btn-sm btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="10" class="text-center">No hay libros registrados.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('#mitabla').DataTable();
+    });
+</script>
+{% endblock %}

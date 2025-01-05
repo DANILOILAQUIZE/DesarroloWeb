@@ -1,0 +1,6 @@
+body {
+    background: url('https://www.transparenttextures.com/patterns/old-map.png'); /* O usa otra imagen de fondo de papel o madera */
+    height: 100vh;
+    background-size: cover;
+    background-attachment: fixed;
+}

@@ -1,0 +1,55 @@
+{% extends "plantilla.html" %}
+
+{% block contenido %}
+
+<!-- Formulario para crear una categoría -->
+<div class="container mt-4">
+    <h2>Crear Categoría</h2>
+    <form id="frm_crear_categoria" action="{% url 'guardarCategoria' %}" method="POST">
+        {% csrf_token %}
+        
+        <!-- Campo para el nombre de la categoría -->
+        <div class="mb-3">
+            <label for="id_nombre" class="form-label">Nombre de la Categoría:</label>
+            <input type="text" name="nombre" id="id_nombre" class="form-control" maxlength="50" required>
+        </div>
+        
+        <!-- Botones de acción -->
+        <button type="submit" class="btn btn-primary">Crear</button>
+        <a href="" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+
+
+<script>
+    $(document).ready(function() {
+        // Validación del formulario
+        $("#frm_crear_categoria").validate({
+            rules: {
+                "nombre": {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 50,
+                    letras: true
+                }
+            },
+            messages: {
+                "nombre": {
+                    required: "Por favor, ingrese el nombre de la categoría.",
+                    minlength: "El nombre debe tener al menos 3 caracteres.",
+                    maxlength: "El nombre no puede exceder los 50 caracteres."
+                }
+            },
+            errorClass: "error",
+            validClass: "success",
+            highlight: function(element, errorClass, validClass) {
+                $(element).removeClass(validClass).addClass(errorClass);
+            },
+            unhighlight: function(element, errorClass, validClass) {
+                $(element).removeClass(errorClass).addClass(validClass);
+            }
+        });
+    });
+</script>
+
+{% endblock %}

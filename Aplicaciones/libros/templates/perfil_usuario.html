@@ -1,0 +1,36 @@
+<!-- perfil_usuario.html -->
+{% extends "plantilla.html" %}
+
+{% block contenido %}
+<h2 class="text-center">Perfil de Usuario</h2>
+<div class="container d-flex justify-content-center">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <th scope="row">Nombre de usuario</th>
+                        <td>{{ usuario.username }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">ROL</th>
+                        <td>{{ usuario.perfil.rol }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Correo electrónico</th>
+                        <td>{{ usuario.email }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Dirección</th>
+                        <td>{{ usuario.perfil.direccion }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Fecha de registro</th>
+                        <td>{{ usuario.date_joined }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

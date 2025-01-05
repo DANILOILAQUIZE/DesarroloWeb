@@ -1,0 +1,118 @@
+{% load static %}
+<!-- IMPORTANDO JQUEY-->
+<script src="{% static 'js/jquery-3.7.1.js' %}"></script>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    
+    <!--IMPORTANDO LA PLANTILLA JQUERY VALIDATE-->
+    <script src="{% static 'js/jquery.validate.js' %}"></script>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h1 class="text-center mb-4">Registro de Usuario</h1>
+                <form method="POST" action="" class="border p-4 rounded shadow-sm" id="frm_registro_usuario">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="username">Nombre de Usuario:</label>
+                        <input type="text" id="username" name="username" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico:</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Contraseña:</label>
+                        <input type="password" id="password" name="password" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">Teléfono:</label>
+                        <input type="text" id="telefono" name="telefono" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="direccion">Dirección:</label>
+                        <textarea id="direccion" name="direccion" class="form-control" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="rol">Rol:</label>
+                        <select id="rol" name="rol" class="form-control">
+                            <option value="">Seleccione...</option>
+                            <option value="Administrador">Administrador</option>
+                            <option value="Comprador">Comprador</option>
+                            <option value="Vendedor">Vendedor</option>
+                        </select>
+                    </div>
+                    <br>
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary w-10">Registrar</button>
+                        <a href="{% url 'login' %}" class="btn btn-secondary w-45">Cancelar</a>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $("#frm_registro_usuario").validate({
+                rules: {
+                    "username": {
+                        required: true,
+                        minlength: 3
+                    },
+                    "email": {
+                        required: true,
+                        email: true
+                    },
+                    "password": {
+                        required: true,
+                        minlength: 6
+                    },
+                    "telefono": {
+                        required: true,
+                        digits: true,
+                        minlength: 10,
+                        maxlength: 15
+                    },
+                    "direccion": {
+                        required: true,
+                        minlength: 5
+                    },
+                    "rol": {
+                        required: true
+                    }
+                },
+                messages: {
+                    "username": {
+                        required: "Por favor, ingrese un nombre de usuario.",
+                        minlength: "El nombre de usuario debe tener al menos 3 caracteres."
+                    },
+                    "email": {
+                        required: "Por favor, ingrese un correo electrónico.",
+                        email: "Por favor, ingrese un correo electrónico válido."
+                    },
+                    "password": {
+                        required: "Por favor, ingrese una contraseña.",
+                        minlength: "La contraseña debe tener al menos 6 caracteres."
+                    },
+                    "telefono": {
+                        required: "Por favor, ingrese un número de teléfono.",
+                        digits: "Por favor, ingrese solo números.",
+                        minlength: "El teléfono debe tener al menos 10 caracteres.",
+                        maxlength: "El teléfono no puede tener más de 15 caracteres."
+                    },
+                    "direccion": {
+                        required: "Por favor, ingrese una dirección.",
+                        minlength: "La dirección debe tener al menos 5 caracteres."
+                    },
+                    "rol": {
+                        required: "Por favor, seleccione un rol."
+                    }
+                },
+                submitHandler: function(form) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
+</body>

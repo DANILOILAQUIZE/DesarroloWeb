@@ -1,0 +1,41 @@
+{% extends "plantilla.html" %}
+
+{% block contenido %}
+<div class="container mt-4">
+    <h2 class="text-center">Lista de Categorías</h2>
+
+    <!-- Tabla con borde y centrado -->
+    <table class="table table-bordered mx-auto">
+        <thead>
+            <tr>
+                <th class="text-center"> ID </th>
+                <th class="text-center">Nombre de la Categoría</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for categoria in categorias %}
+                <tr>
+                    <td class="text-center">{{ forloop.counter }}</td>
+                    <td class="text-center">{{ categoria.nombre }}</td>
+                    <td class="text-center">
+                        <a href="" class="btn btn-primary btn-sm">Actualizar</a>
+                        <a href="{% url 'eliminarCategoria' categoria.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+
+
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="2" class="text-center">No hay categorías registradas.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Botón para crear nueva categoría -->
+    <div class="text-center">
+        <a href="{% url 'agregarCategoria' %}" class="btn btn-primary">Crear Nueva Categoría</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends "plantilla.html" %}
+
+{% block contenido %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Editar Libro</h2>
+
+    
+    <form action="{% url 'actualizarLibro' libro.id %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div>
+            <input type="hidden" name="id" value="{{ libro.id }}">
+        </div>
+        <div class="mb-3">
+            <label for="titulo" class="form-label">Título</label>
+            <input type="text" class="form-control" id="titulo" name="titulo" value="{{ libro.titulo }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="autor" class="form-label">Autor</label>
+            <input type="text" class="form-control" id="autor" name="autor" value="{{ libro.autor }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="precio" class="form-label">Precio</label>
+            <input type="number" step="0.01" class="form-control" id="precio" name="precio" value="{{ libro.precio }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="categoria" class="form-label">Categoría</label>
+            <select class="form-select" id="categoria" name="categoria" required>
+                {% for categoria in categorias %}
+                    <option value="{{ categoria.id }}" {% if categoria.id == libro.categoria.id %}selected{% endif %}>
+                        {{ categoria.nombre }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="vendedor" class="form-label">Vendedor</label>
+            <select class="form-select" id="vendedor" name="vendedor" required>
+                {% for usuario in vendedores %}
+                    <option value="{{ usuario.id }}" {% if usuario.id == libro.vendedor.id %}selected{% endif %}>
+                        {{ usuario.username }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="disponible" class="form-label">Disponible</label>
+            <select class="form-select" id="disponible" name="disponible" required>
+                <option value="True" {% if libro.disponible %}selected{% endif %}>Sí</option>
+                <option value="False" {% if not libro.disponible %}selected{% endif %}>No</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="imagen" class="form-label">Imagen del Libro</label>
+            {% if libro.imagen %}
+                <div class="mb-2">
+                    <img src="{{ libro.imagen.url }}" alt="Imagen actual" class="img-thumbnail" style="width: 150px; height: auto;">
+                </div>
+            {% endif %}
+            <input type="file" class="form-control" id="imagen" name="imagen">
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-success">Guardar Cambios</button>
+            <a href="" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

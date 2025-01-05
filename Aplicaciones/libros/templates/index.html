@@ -1,0 +1,24 @@
+{% extends "plantilla.html" %}
+{% block contenido %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link href="{% static 'css/estil.css' %}" rel="stylesheet">
+    <title>Biblioteca Virtual</title>
+
+</head>
+<body>
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Bienvenidos a la Biblioteca Virtual</h1>
+            <p>Compra y vende libros usados entre estudiantes fácilmente.</p>
+            <a href="#explorar" class="btn">Explora los Libros Disponibles</a>
+        </div>
+    </header>
+</body>
+</html>
+
+{% endblock %}

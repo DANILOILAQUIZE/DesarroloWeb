@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    {% load static %}
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet"> <!-- Enlace al archivo CSS externo -->
+</head>
+<body class="d-flex justify-content-center align-items-center min-vh-100">
+    <div class="login-container">
+        <h2 class="text-center">
+            <i class="bi bi-book-fill"></i> Iniciar Sesión
+        </h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="username" class="form-label">Nombre de Usuario</label>
+                <input type="text" name="username" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" name="password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-custom">Iniciar sesión</button>
+        </form>
+        <p class="footer-text">¿No tienes cuenta? <a href="{% url 'registrar_usuario' %}">Regístrate aquí</a></p>
+    </div>
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

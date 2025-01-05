@@ -1,0 +1,35 @@
+{% extends "plantilla.html" %}
+{% block contenido %}
+<h2 class="text-center mb-4">LISTADO DE USUARIOS</h2>
+<a href="{% url 'registrar_usuario' %}" class="btn btn-primary mb-3">NUEVO USUARIO</a>
+<table class="table table-bordered">
+    <thead class="table-light">
+        <tr>
+            <th>Usuario</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+            <th>Dirección</th>
+            <th>CONTRASEÑA</th>
+            <th>ROL</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for usuario in usuarios %}
+        <tr>
+            <td>{{ usuario.username }}</td>
+            <td>{{ usuario.email }}</td>
+            <td>{{ usuario.perfil.telefono }}</td>
+            <td>{{ usuario.perfil.direccion }}</td>
+            <td>{{ usuario.password }}</td>
+            <td>{{ usuario.perfil.rol }}</td>
+            <td>
+                <a href="{% url 'editarUsuario' usuario.id %}" class="btn btn-sm btn-primary">Actualizar</a>
+                <a href="{% url 'eliminar_usuario' usuario.id %}" class="btn btn-sm btn-danger">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}      

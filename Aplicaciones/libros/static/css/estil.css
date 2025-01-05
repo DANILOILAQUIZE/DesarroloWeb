@@ -1,0 +1,52 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.hero {
+    margin: 0; /* Elimina cualquier margen externo */
+    padding: 0; /* Elimina padding interno */
+    height: calc(100vh - 60px); /* Ajusta la altura restando la altura del encabezado (si el encabezado mide 60px) */
+    display: flex;
+    align-items: center; /* Centra verticalmente el contenido */
+    justify-content: center; /* Centra horizontalmente el contenido */
+    background-image: url('ruta-a-tu-imagen.jpg'); /* Cambia la ruta según tu imagen */
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+}
+
+.hero-content {
+    margin-top: 0; /* Asegúrate de que no haya margen superior */
+    padding: 10px; /* Espaciado interno compacto */
+    background: rgba(0, 0, 0, 0.6); /* Fondo semitransparente */
+    border-radius: 8px;
+    max-width: 600px;
+}
+
+
+h1 {
+    font-size: 3rem;
+    margin: 0;
+}
+
+p {
+    font-size: 1.5rem;
+    margin: 10px 0;
+}
+
+.btn {
+    background-color: #ff9800;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #e68900;
+}
